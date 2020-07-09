@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('dashboard');
-});
-Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+// Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Auth::routes();
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', function () {
+        return view('dashboard');
+    });
+});
