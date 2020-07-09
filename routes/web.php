@@ -17,11 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 // Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', function () {
-        return view('dashboard');
-    });
+    Route::resource('question', 'QuestionController');
+    Route::resource('answer', 'AnswerController');
 });
