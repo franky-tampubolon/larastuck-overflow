@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfilesAnswersTable extends Migration
+class CreateUsersAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProfilesAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('profiles_answers', function (Blueprint $table) {
+        Schema::create('users_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profile_id');
+            $table->foreignId('user_id');
             $table->foreignId('answer_id');
-            $table->foreign('profile_id')->references('id')->on('profiles')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('answer_id')->references('id')->on('answers')->cascadeOnDelete();
             $table->timestamps();
         });
