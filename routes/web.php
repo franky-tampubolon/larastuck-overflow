@@ -18,9 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function(){
-    return view('dashboard');
-});
+// Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
@@ -28,3 +26,7 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 // pertanyaan route
 Route::middleware('auth')->get('/pertanyaan', 'PertanyaanController@index');
 Route::middleware('auth')->post('/pertanyaan', 'PertanyaanController@store');
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('question', 'QuestionController');
+    Route::resource('answer', 'AnswerController');
+});

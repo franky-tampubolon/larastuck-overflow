@@ -47,7 +47,8 @@
           <li class="user-footer form-inline justify-content-between">
             <a href="#" class="btn btn-outline-primary rounded-pill ml-5">Profile</a>
             <form action="{{ route('logout') }}" method="POST" class="">
-            <button type="submit" class="btn btn-outline-danger rounded-pill">Log out</button>
+              @csrf
+              <button type="submit" class="btn btn-outline-danger rounded-pill">Log out</button>
             </form>
           </li>
         </ul>
