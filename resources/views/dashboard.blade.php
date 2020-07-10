@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col">                
                 <div class="float-right btn btn-outline-primary rounded-pill mt-4">
-                    <a href="">Add Question</a>
+                    <a href="{{url('/pertanyaan')}}">Add Question</a>
                 </div>
                 <h1> Daftar Pertanyaan</h1>
                 <p class="text-muted">1200 pertanyaan</p>

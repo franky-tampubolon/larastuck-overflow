@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,7 @@ Route::get('/test', function(){
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+// pertanyaan route
+Route::middleware('auth')->get('/pertanyaan', 'PertanyaanController@index');
+Route::middleware('auth')->post('/pertanyaan', 'PertanyaanController@store');

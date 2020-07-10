@@ -7,5 +7,6 @@
 <script src="{{ asset('bootstrap/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('bootstrap/dist/js/adminlte.min.js') }}"></script>
+@stack('ckeditor')
 </body>
 </html>
