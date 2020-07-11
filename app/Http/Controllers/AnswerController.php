@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AnswerController extends Controller
 {
@@ -12,7 +13,7 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function upvote(Request $request)
     {
         //
     }
@@ -22,7 +23,7 @@ class AnswerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function downvote(Request $request)
     {
         //
     }
@@ -35,7 +36,14 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        Answer::create([
+            'isi'   => $request->jawaban,
+            'question_id'   => $request->id_question,
+            'user_id'   => Auth()->user()->id
+        ]);
+        Alert::success('Berhasil', 'Pertanyaan berhasil disimpan');
+        return redirect('question');
     }
 
     /**
@@ -44,9 +52,13 @@ class AnswerController extends Controller
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function show(Answer $answer)
+    public function benar($id)
     {
-        //
+        Answer::where('id', $id)->update([
+            'selected' => 1
+        ]);
+        Alert::success('Berhasil', 'Jawaban ini berhasil ditandai benar');
+        return redirect('question/');
     }
 
     /**

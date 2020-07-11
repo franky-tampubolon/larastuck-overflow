@@ -26,6 +26,7 @@
         <div class="card">
             <div class="card-body login-card-body">
             <p class="login-box-msg">Silakan Login</p>
+            <div class="text-center"><strong>F</strong> <i class="fas fa-database text-danger"></i> P</div>
 
         <form action="{{ route('login') }}" method="post">
         @csrf
@@ -43,16 +44,10 @@
             </div>
             </div>
             <div class="input-group mb-3">
-            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-                </div>
-                <div class="input-group mb-3">
-                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
                 <div class="input-group-append">
                     <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
+                        <span class="fas fa-lock"></span>
                     </div>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -60,13 +55,13 @@
                         </span>
                     @enderror
                 </div>
-                </div>
+            </div>
                 <div class="row">
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary rounded-pill">Login</button>
                 </div>
                 <!-- /.col -->
-                </div>
+            </div>
             </form>
 
             <p class="mb-1">

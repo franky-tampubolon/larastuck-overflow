@@ -30,26 +30,29 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{url('/question')}}" method="post">
+                        <form action="{{url('question/'.$question->id)}}" method="post">
                         @csrf
+                        @method('put')
                             <div class="form-group">
                                 <label for="judul">Judul</label>
                                 <small class="text-secondary">Isi judul pertanyaan kamu</small>
-                                <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" placeholder="masukkan judul pertanyaan" value="{{ old('judul') }}">
+                                <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" placeholder="masukkan judul pertanyaan" value="{{ $question->judul }}">
                                 @error('judul')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="pertanyaan">Pertanyaan</label>
-                                <textarea class="form-control @error('pertanyaan') is-invalid @enderror" id="pertanyaan" name="pertanyaan" rows="3">{{ old('pertanyaan') }}</textarea>
+                                <textarea class="form-control @error('pertanyaan') is-invalid @enderror" id="pertanyaan" name="pertanyaan" rows="3">{{ $question->isi }}</textarea>
                                 @error('pertanyaan')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="tag">Tag</label>
-                                <input type="text" class="form-control @error('tag') is-invalid @enderror" id="tag" name="tag" placeholder="php, javascript, laravel" value="{{ old('tag') }}">
+                                 
+                                <input type="text" class="form-control @error('tag') is-invalid @enderror" id="tag" name="tag" placeholder="php, javascript, laravel" 
+                                value="{{$question->tag}}">                                
                                 @error('tag')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

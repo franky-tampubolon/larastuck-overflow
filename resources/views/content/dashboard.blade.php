@@ -1,4 +1,4 @@
-@extends('template.master')
+@extends('template.index')
 
 @section('content')
   <!-- Content Wrapper. Contains page content -->
@@ -30,42 +30,63 @@
                     <a href="/question/create">Add Question</a>
                 </div>
                 <h1> Daftar Pertanyaan</h1>
-                <p class="text-muted">1200 pertanyaan</p>
+                <p class="text-muted">@foreach($users as $key => $value)
+                    {{ $value->questions_count}}
+                @endforeach pertanyaan</p>
             </div>
         </div>
         <hr>
-        @foreach ($datas as $data)
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="card-body text-center">
-                    <div class="text-center">0</div>
-                    <span> Votes </span>
-                </div>
-                <div class="card-body text-center">
-                    <div class="text-center">0</div>
-                    <span> Answers </span>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="card-body">
-                    <a href="">
-                        <h3 class="">{{$data->judul}}</h3>
-                    </a>
-                    <p class="card-text">
-                      {{$data->isi}}
-                    </p>
-                    <a href="#" class="btn btn-primary btn-sm">Tag 1</a>
-                    <a href="#" class="btn btn-primary btn-sm">Tag 2</a>
-                    <div class="mt-1">
-                        <a href="">echo nama user yang punya pertanyaan</a>
-                        <p class="text-muted">echo created at pertanyaan</p>
+        @foreach($questions as $key => $data)
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="card-body text-center">
+                        <div class="text-center">
+                          {{$vote}}
+                        </div>
+                        <span> Votes </span>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="text-center">
+                            {{ $data->answers_count }}
+                        </div>
+                        <span> Answers </span>
                     </div>
                 </div>
+                <div class="col-lg-8">
+                    <div class="card-body">
+                        <a href="{{ route('question.show', $data->id) }}">
+                            <h3 class="">{{$data->judul}}</h3>
+                        </a>
+                        <div class="d-flex justify-content-left">                            
+                          <a href="{{ route('question.edit', $data->id) }}" class="btn btn-success btn-sm mr-2" title="Edit Pertanyaan"><i class="fa fa-edit"></i></a>
+                          <form action="{{ route('question.destroy', $data->id) }}" method="post">
+                          @csrf
+                          @method('delete')
+                          <button type="submit" class="btn btn-danger btn-sm" title="Hapus Pertanyaan" onclick="return confirm('Yakin data ini akan dihapus?')"><i class="fa fa-trash"></i></button>
+                          </form>               
+                        </div>
+                        <p class="card-text">
+                          {!! $data->isi !!}
+                        </p>
+                          @if($data->tag == '')
+                            
+                          @else
+                            @foreach(Str::of($data->tag)->explode(',') as $key => $value)
+                            <a href="#" class="btn btn-primary btn-sm">
+                              {{ $value}}
+                            </a>
+                          @endforeach
+                          @endif
+                        <div class="mt-1">
+                            <a href="">{{$data->users->name}}</a>
+                            <p class="text-muted">{{ $data->created_at->diffForHumans()}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-md-8 -->
             </div>
-            @endforeach
-            <!-- /.col-md-8 -->
-        </div>
-        <hr>
+            <hr>
+        @endforeach
 
         <!-- /.row -->
       </div><!-- /.container-fluid -->

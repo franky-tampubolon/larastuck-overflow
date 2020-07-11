@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
 });
 
@@ -29,4 +30,12 @@ Route::middleware('auth')->post('/pertanyaan', 'PertanyaanController@store');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('question', 'QuestionController');
     Route::resource('answer', 'AnswerController');
+    Route::put('answer/benar/{id}', 'AnswerController@benar');
+
+    Route::post('upvote/pertanyaan/{question}', 'UpVoteController@voteQuestion');
+    Route::post('upvote/answer/{answer}', 'UpVoteController@voteAnswer');
+    Route::post('downvote/pertanyaan/{question}', 'DownVoteController@voteQuestion');
+    Route::post('downvote/answer/{answer}', 'DownVoteController@voteAnswer');
+    Route::post('komentar/pertanyaan/{pertanyaan}', 'KomentarController@QuestionComments');
+    Route::post('komentar/answer/{answer}', 'KomentarController@AnswerComments');
 });
